@@ -1,0 +1,13 @@
+import { readMoviesData } from './utils';
+
+export default function handler(req, res) {
+  const { id } = req.query;
+  const movies = readMoviesData();
+  const movie = movies.find(m => m.id === parseInt(id, 10));
+
+  if (movie) {
+    res.status(200).json(movie);
+  } else {
+    res.status(404).json({ error: 'Movie not found' });
+  }
+}
