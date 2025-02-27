@@ -15,42 +15,42 @@ export default function Home() {
   const [japaneseMovies, setJapaneseMovies] = useState([]);
 
   useEffect(() => {
-    async function fetchMovies() {
-      try {
-        const movieResponse = await fetch("http://localhost:3000/movies");
-        const moviesData = await movieResponse.json();
-        setMovies(moviesData);
+  async function fetchMovies() {
+    try {
+      const movieResponse = await fetch("https://your-vercel-backend-url.vercel.app/movies");
+      const moviesData = await movieResponse.json();
+      setMovies(moviesData);
 
-        // Filter movies as needed
-        const featMovies = moviesData.filter(
-          (movie) => movie.featured === true
-        );
-        setFeaturedMovies(featMovies.slice(0, 4));
+      // Filter movies as needed
+      const featMovies = moviesData.filter(
+        (movie) => movie.featured === true
+      );
+      setFeaturedMovies(featMovies.slice(0, 4));
 
-        const draMovies = moviesData.filter((movie) =>
-          movie.genre.includes("Drama")
-        );
-        setDramaMovies(draMovies.slice(0, 6));
+      const draMovies = moviesData.filter((movie) =>
+        movie.genre.includes("Drama")
+      );
+      setDramaMovies(draMovies.slice(0, 6));
 
-        const hinMovies = moviesData.filter(
-          (movie) => movie.language === "Hindi"
-        );
-        setHindiMovies(hinMovies.slice(0, 6));
+      const hinMovies = moviesData.filter(
+        (movie) => movie.language === "Hindi"
+      );
+      setHindiMovies(hinMovies.slice(0, 6));
 
-        const topRatedMovies = moviesData.filter((movie) => movie.imdb >= 8.5);
-        setTopMovies(topRatedMovies.slice(0, 6));
+      const topRatedMovies = moviesData.filter((movie) => movie.imdb >= 8.5);
+      setTopMovies(topRatedMovies.slice(0, 6));
 
-        const japanMovies = moviesData.filter(
-          (movie) => movie.country === "Japan"
-        );
-        setJapaneseMovies(japanMovies.slice(0, 6));
-      } catch (err) {
-        console.log(err);
-      }
+      const japanMovies = moviesData.filter(
+        (movie) => movie.country === "Japan"
+      );
+      setJapaneseMovies(japanMovies.slice(0, 6));
+    } catch (err) {
+      console.log(err);
     }
+  }
 
-    fetchMovies();
-  }, []);
+  fetchMovies();
+}, []);
 
   return (
     <>
